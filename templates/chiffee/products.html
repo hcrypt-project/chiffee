@@ -1,8 +1,19 @@
 {% extends "chiffee/base.html" %}
 
 
-{% block body %} {% for cat in categories %}
-		{% for product in products %}{% if product.product_categorie == cat.0 %}{% if product.product_active == True %}
-			<a class="{{ cat.1 }}" href="{% url 'chiffee:users' product.product_name %}">{{ product.product_name }}<br>({{ product.product_price|floatformat:2 }})</a>{% endif %}{% endif %}{% endfor %}{% endfor %}
+
+{% block body %} 
+
+{% for cat in categories %}
+	{% for product in products %}
+		{% if product.product_categorie == cat.0 %}
+			{% if product.product_active == True %}
+			<a class="{{ cat.1 }}" href="{% url 'chiffee:confirm' user product.product_name %}">
+				{{ product.product_name }}<br>({{ product.product_price|floatformat:2 }})</a>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+
 {% endblock %}
 

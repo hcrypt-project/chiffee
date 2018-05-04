@@ -1,11 +1,11 @@
 {% extends "chiffee/base.html" %}
 
 
-{% block body %}{% for user in profs %}{% if user.is_active == True %}
-			<a class="Trinken" href="{% url 'chiffee:confirm' product user %}">{{ user.first_name }} {{ user.last_name }}</a>{% endif %}{% endfor %}
-{% for user in wimi %}{% if user.is_active == True %}
-			<a class="Snacks" href="{% url 'chiffee:confirm' product user %}">{{ user.first_name }} {{ user.last_name }}</a>{% endif %}{% endfor %}
-{% for user in stud %}{% if user.is_active == True %}
-			<a class="Eis" href="{% url 'chiffee:confirm' product user %}">{{ user.first_name }} {{ user.last_name }}</a>{% endif %}{% endfor %}
+{% block body %}
+			<center><a class="Trinken" onclick="document.getElementById('cardId').focus();return false;" href="">Karte auflegen</a></center>
+
+			<form onsubmit="mysubmit();return false;" >
+				<input type="text" id="cardId" maxlength="20" autocomplete="off" autofocus />
+			</form>
 {% endblock %}
 

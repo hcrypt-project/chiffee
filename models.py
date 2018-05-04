@@ -40,6 +40,7 @@ class Deposit(models.Model):
 
 class Employee(models.Model):
 	user = models.OneToOneField(User)
+	card_id = models.IntegerField(default=0)
 	balance = models.FloatField(default=0.0)
 	allMails = models.BooleanField(default=True)
 

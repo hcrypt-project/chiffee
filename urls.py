@@ -1,3 +1,4 @@
+# encoding=utf8
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
@@ -11,9 +12,10 @@ urlpatterns = [
     url(r'^prod/$', views.showproducts, name='prod'),
     url(r'^history/$', views.showhistory, name='history'),
 
-    url(r'^$', views.products, name='index'),
-    url(r'^(?P<productID>[a-z,A-Z,\s]+)/$', views.users, name='users'),
-    url(r'^(?P<productID>[a-z,A-Z,\s]+)/(?P<userID>[a-z,A-Z,\s]+)/$', views.confirm, name='confirm'),
-    url(r'^(?P<productID>[a-z,A-Z,\s]+)/(?P<userID>[a-z,A-Z,\s]+)/(?P<count>[0-9]+)$', views.confirmed, name='confirmed'),
+    
+    url(r'^$', views.users, name='index'),
+    url(r'^(?P<userID>[0-9,a-z,A-Z,\s]+)/$', views.products, name='products'),
+    url(r'^(?P<userID>[0-9,a-z,A-Z,\s]+)/(?P<productID>[0-9,a-z,A-Z,\-,\.,\,\s]+)/$', views.confirm, name='confirm'),
+    url(r'^(?P<userID>[0-9,a-z,A-Z,\s]+)/(?P<productID>[0-9,a-z,A-Z,\-,\.,\,\s]+)/(?P<count>[0-9]+)$', views.confirmed, name='confirmed'),
 
 ]

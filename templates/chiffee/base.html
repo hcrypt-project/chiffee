@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Chiffee</title>
+		<title>RRZN Chiffee</title>
 		<style>
+		
 		body{
 			font-size: 200%;
 			background-color: #555555;
 			color: white;
 		}
+		
+		input{
+			background-color: #555555;
+			color: #555555;
+			border-color: #555555;
+			border-style: none;
+		}
+
 		a:link, a:visited {
 			background-color: #5086de;
 			color: white;
@@ -41,13 +50,23 @@
 			m = "0" + m;
 		}
 		document.getElementById('headline').innerHTML =
-		"Chiffee - " + h + ":" + m + " Uhr";
+		"RRZN Chiffee - " + h + ":" + m + " Uhr";
 		var t = setTimeout(Time, 5000);
 	}
+
+	
+	function mysubmit() {
+		
+		var myurl = 'http://localhost:8000/'+document.getElementById("cardId").value;
+		
+		window.location.href=myurl;
+	}
+
+	
 	</script>
 	</head>
 	<body onload="Time()">
-		<h1 align="center" id="headline">Chiffee</h1>
+		<h1 align="center" id="headline">RRZN Chiffee</h1>
 	{% block body %}{% endblock %}
 	</body>
 </html>

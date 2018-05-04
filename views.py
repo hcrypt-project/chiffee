@@ -109,22 +109,27 @@ def showproducts(request):
 	context['products'] = Product.objects.order_by('product_categorie')
 	return render(request, 'chiffee/productoverview.html', context)
 
-def products(request):
+def products(request,userID):
 	context = {}
-	context['categories'] = CATEGORIES
-	context['products'] = Product.objects.order_by('product_categorie')
-	return render(request, 'chiffee/products.html', context)
+	try:
+		user = User.objects.get(username=userID)	
+		context['user'] = userID
+		context['categories'] = CATEGORIES
+		context['products'] = Product.objects.order_by('product_categorie')
+		return render(request, 'chiffee/products.html', context)
+	except User.DoesNotExist:
+		return render(request, 'chiffee/unknown.html', context)
 
-def users(request,productID):
-	get_object_or_404(Product, product_name=productID)
+def users(request):
 	context = {}
-	context['product'] = productID
-	context['profs'] = Group.objects.get(name="prof").user_set.all().order_by('username')
-	context['wimi'] = Group.objects.get(name="wimi").user_set.all().order_by('username')
-	context['stud'] = Group.objects.get(name="stud").user_set.all().order_by('username')
+	#context['product'] = productID
+	#context['profs'] = Group.objects.get(name="prof").user_set.all().order_by('username')
+	#context['wimi'] = Group.objects.get(name="wimi").user_set.all().order_by('username')
+	#context['stud'] = Group.objects.get(name="stud").user_set.all().order_by('username')
+	#context['users'] = Employee.objects.order_by('card_id')
 	return render(request, 'chiffee/user.html', context)
 
-def confirm(request,productID, userID):
+def confirm(request, userID,productID):
 	get_object_or_404(Product, product_name=productID)
 	user = get_object_or_404(User, username=userID)
 	context = {}
@@ -133,7 +138,7 @@ def confirm(request,productID, userID):
 	context['username'] = user.first_name + " " + user.last_name
 	return render(request, 'chiffee/confirm.html', context)
 
-def confirmed(request,productID, userID,count):
+def confirmed(request, userID,productID,count):
 	product = get_object_or_404(Product, product_name=productID)
 	user = get_object_or_404(User, username=userID)
 	context = {}

@@ -3,14 +3,14 @@
 
 {% block body %}
 	Soll wirklich ein {{ product }} f&uuml;r {{ username }} gekauft werden? <br>
-	<a href="{% url 'chiffee:confirmed' product user 1%}" >Ja</a> <a href="{% url 'chiffee:index' %}">Nein</a> <br>
+	<a href="{% url 'chiffee:confirmed' user product  1%}" >Ja</a> <a href="{% url 'chiffee:index' %}">Nein</a> <br>
 	
 	Oder lieber gleich mehrere?<br>
-	<a href="{% url 'chiffee:confirmed' product user 2%}" >2</a>
-	<a href="{% url 'chiffee:confirmed' product user 3%}" >3</a>
-	<a href="{% url 'chiffee:confirmed' product user 4%}" >4</a>
-	<a href="{% url 'chiffee:confirmed' product user 5%}" >5</a>
-	<a href="{% url 'chiffee:confirmed' product user 10%}" >10</a>
+	<a href="{% url 'chiffee:confirmed' user product  2%}" >2</a>
+	<a href="{% url 'chiffee:confirmed' user product  3%}" >3</a>
+	<a href="{% url 'chiffee:confirmed' user product  4%}" >4</a>
+	<a href="{% url 'chiffee:confirmed' user product  5%}" >5</a>
+	<a href="{% url 'chiffee:confirmed' user product  10%}" >10</a>
 	
 {% endblock %}
 
