@@ -129,6 +129,10 @@ def users(request):
 	#context['users'] = Employee.objects.order_by('card_id')
 	return render(request, 'chiffee/user.html', context)
 
+def timeout(request):
+	context = {}
+	return render(request, 'chiffee/timeout.html',context)
+
 def confirm(request, userID,productID):
 	get_object_or_404(Product, product_name=productID)
 	user = get_object_or_404(User, username=userID)

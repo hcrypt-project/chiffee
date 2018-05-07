@@ -1,5 +1,8 @@
 {% extends "chiffee/base.html" %}
 
+{% block head %}
+<meta http-equiv="refresh" content="30; url={% url 'chiffee:timeout' %}" />
+{% endblock %}
 
 {% block body %}
 	Soll wirklich ein {{ product }} f&uuml;r {{ username }} gekauft werden? <br>

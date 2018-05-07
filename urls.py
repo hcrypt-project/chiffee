@@ -11,7 +11,8 @@ urlpatterns = [
     url(r'^money/$', views.showmoney, name='money'),
     url(r'^prod/$', views.showproducts, name='prod'),
     url(r'^history/$', views.showhistory, name='history'),
-
+    url(r'^timeout/$', views.timeout, name='timeout'),
+    
     
     url(r'^$', views.users, name='index'),
     url(r'^(?P<userID>[0-9,a-z,A-Z,\s]+)/$', views.products, name='products'),

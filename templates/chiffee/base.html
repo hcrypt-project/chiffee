@@ -52,7 +52,7 @@
 	
 	function mysubmit() {
 		
-		var myurl = 'http://localhost:8000/'+document.getElementById("cardId").value;
+		var myurl = location.protocol+'//'+location.host+'/'+document.getElementById("cardId").value;
 		
 		window.location.href=myurl;
 	}
