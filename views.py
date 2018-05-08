@@ -14,10 +14,11 @@ from django.contrib.auth.models import Group
 from pprint import pprint
 
 from .models import Product, Buy, CATEGORIES, Employee, Deposit
+import sys
 
 
-fromaddr = "kaffeekasse@chi.uni-hannover.de"
-subject  = "Kauf Kaffeekasse"
+fromaddr = "kaffeekasse@luis.uni-hannover.de"
+subject  = "Kauf an der Kaffeekasse"
 
 @login_required(login_url='chiffee:login')
 def showhistory(request):
@@ -102,6 +103,32 @@ def showmoney(request):
 	return render(request, 'chiffee/money.html', context)
 
 @login_required(login_url='chiffee:login')
+def balance(request):
+	print('balance()')
+	sys.stdout.flush()
+
+	context = {}
+	context['users'] = []
+	if request.user.is_superuser:
+		for u in User.objects.order_by('last_name', 'first_name'):
+			print(' '+str(u.id)+' '+u.username+' '+u.first_name+' '+u.last_name)
+			sys.stdout.flush()
+
+			buys = {}
+			buys = Buy.objects.filter(buy_user = u.id)
+			for b in buys:
+				print (b)
+			
+			u2 = {}
+			u2['last_name'] = u.last_name
+			u2['first_name'] = u.first_name
+			u2['balance'] = 1.2
+			u2['buys'] = buys
+			context['users'].append(u2)	
+
+	return render(request, 'chiffee/balance.html', context)
+
+@login_required(login_url='chiffee:login')
 @user_passes_test(lambda u: u.is_superuser)
 def showproducts(request):
 	context = {}
@@ -128,6 +155,7 @@ def users(request):
 	#context['stud'] = Group.objects.get(name="stud").user_set.all().order_by('username')
 	#context['users'] = Employee.objects.order_by('card_id')
 	return render(request, 'chiffee/user.html', context)
+
 
 def timeout(request):
 	context = {}

@@ -11,6 +11,7 @@
 			<a href="{% url 'chiffee:history' %}">K&auml;ufe</a>{% if user.is_superuser %}
 			<a href="{% url 'chiffee:money' %}">Konten&uuml;bersicht</a>
 			<a href="{% url 'chiffee:prod' %}">Produkt&uuml;bersicht</a>
+			<a href="{% url 'chiffee:balance' %}">Konten abrechnen</a>
 {% endif %}			<a href="{% url 'chiffee:logout' %}" >Logout</a>
 		</p>
 

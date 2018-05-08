@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^prod/$', views.showproducts, name='prod'),
     url(r'^history/$', views.showhistory, name='history'),
     url(r'^timeout/$', views.timeout, name='timeout'),
+    url(r'^balance/$', views.balance, name='balance'),
     
     
     url(r'^$', views.users, name='index'),

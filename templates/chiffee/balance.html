@@ -1,0 +1,40 @@
+{% extends "chiffee/home.html" %}
+
+
+{% block logedinbody %}
+{% if error %}
+		<h2 align="center" >{{ error }}</h2>
+{% endif %}
+
+ {% for u in users %}
+<table>
+    
+    <tr>
+		<th>Produkt</th>
+		<th>Anzahl</th>
+		<th>Kosten</th>			
+    </tr>		
+
+   
+    
+    <tr>
+        <td>{{ u.first_name }} {{u.last_name }}</td>
+        <td>{{ u.balance|floatformat:2 }}</td>
+        <td>-</td>
+    </tr>
+    
+    
+	              
+        {% for b in u.buys %}
+        <tr>
+        <td> {{ b.buy_product }}</td><td>{{ b.buy_count }}</td><td>-</td>
+        </tr>
+        {% endfor %}
+	
+    
+ </table>   
+ <hr>
+{% endfor %}
+
+{% endblock %}
+
