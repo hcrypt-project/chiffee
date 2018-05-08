@@ -7,7 +7,16 @@
 {% endif %}
 
  {% for u in users %}
+
 <table>
+    <tr>
+        <td>{{ u.first_name }} {{u.last_name }}</td>
+        <td>Kontostand</td>
+        <td>{{ u.balance|floatformat:2 }}</td>        
+    </tr>
+</table>
+
+ <table>
     
     <tr>
 		<th>Produkt</th>
@@ -15,22 +24,11 @@
 		<th>Kosten</th>			
     </tr>		
 
-   
-    
+    {% for b in u.buys.values %}
     <tr>
-        <td>{{ u.first_name }} {{u.last_name }}</td>
-        <td>{{ u.balance|floatformat:2 }}</td>
-        <td>-</td>
+        <td> {{ b.buy_product.product_name }}</td><td>{{ b.buy_count }}</td><td>{{ b.buy_total|floatformat:2 }}</td>
     </tr>
-    
-    
-	              
-        {% for b in u.buys %}
-        <tr>
-        <td> {{ b.buy_product }}</td><td>{{ b.buy_count }}</td><td>-</td>
-        </tr>
-        {% endfor %}
-	
+    {% endfor %}
     
  </table>   
  <hr>

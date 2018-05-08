@@ -104,26 +104,49 @@ def showmoney(request):
 
 @login_required(login_url='chiffee:login')
 def balance(request):
-	print('balance()')
+#	print('balance()')
 	sys.stdout.flush()
 
 	context = {}
 	context['users'] = []
 	if request.user.is_superuser:
 		for u in User.objects.order_by('last_name', 'first_name'):
-			print(' '+str(u.id)+' '+u.username+' '+u.first_name+' '+u.last_name)
+#			print(' '+str(u.id)+' '+u.username+' '+u.first_name+' '+u.last_name)
 			sys.stdout.flush()
+
+			e = Employee.objects.get(user_id = u.id)
 
 			buys = {}
 			buys = Buy.objects.filter(buy_user = u.id)
+
+			buys2 = {}
+
+#			print ('type of buys is '+str(type(buys)))
+#			print ('type of buys2 is '+str(type(buys2)))
+
 			for b in buys:
-				print (b)
+#				print (b)
+#				print ('type of b is '+str(type(b)))
+				if b.buy_product.product_name not in buys2:
+#					print('buy '+str(b.buy_product)+' ist neu:'+str(b.buy_count))
+					buys2[b.buy_product.product_name]=Buy(buy_count=b.buy_count, 
+														  buy_product=b.buy_product, 
+														  buy_total=b.buy_total,
+														  buy_user=b.buy_user)
+				else:
+#					print('buy '+str(b.buy_product)+' gibts schon: '+str(buys2[b.buy_product.product_name].buy_count)+'; '+str(b.buy_count)+' dazu')
+					buys2[b.buy_product.product_name].buy_total+=b.buy_total
+					buys2[b.buy_product.product_name].buy_count+=b.buy_count
+			
+#			print(buys2.keys())
+#			print(buys2.values())
+			
 			
 			u2 = {}
 			u2['last_name'] = u.last_name
 			u2['first_name'] = u.first_name
-			u2['balance'] = 1.2
-			u2['buys'] = buys
+			u2['balance'] = e.balance
+			u2['buys'] = buys2
 			context['users'].append(u2)	
 
 	return render(request, 'chiffee/balance.html', context)
