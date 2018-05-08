@@ -16,7 +16,7 @@ class Product(models.Model):
 	product_active = models.BooleanField(default=True)
 
 	def __str__(self):              # __unicode__ on Python 2
-		return (str(self.product_name) + " (" + str(self.product_price) + ")")
+		return (str(self.product_name) + u" (" + str(self.product_price) + u")")
 
 class Buy(models.Model):
 	buy_date = models.DateTimeField(auto_now_add=True)

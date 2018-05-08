@@ -10,7 +10,7 @@
 	{% for product in products %}
 		{% if product.product_categorie == cat.0 %}
 			{% if product.product_active == True %}
-			<a class="{{ cat.1 }}" href="{% url 'chiffee:confirm' user product.product_name %}">
+			<a class="{{ cat.1 }}" href="{% url 'chiffee:confirm' user product.id %}">
 				{{ product.product_name }}<br>({{ product.product_price|floatformat:2 }})</a>
 			{% endif %}
 		{% endif %}

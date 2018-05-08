@@ -185,10 +185,11 @@ def timeout(request):
 	return render(request, 'chiffee/timeout.html',context)
 
 def confirm(request, userID,productID):
-	get_object_or_404(Product, product_name=productID)
+	get_object_or_404(Product, id=productID)
 	user = get_object_or_404(User, username=userID)
 	context = {}
-	context['product'] = productID
+	context['product'] = Product.objects.get(id=productID).product_name
+	#context['product_id'] = productID
 	context['user'] = userID
 	context['username'] = user.first_name + " " + user.last_name
 	return render(request, 'chiffee/confirm.html', context)
